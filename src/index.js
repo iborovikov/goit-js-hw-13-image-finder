@@ -56,9 +56,16 @@ function chekInput(serchItem, cardData) {
 }
 
 async function fetchCards(serchItem, pageNumber) {
+    try {
     const response = await fetch(`${BASE_URL}?image_type=photo&orientation=horizontal&q=${serchItem}&page=${pageNumber}&per_page=12&key=${API_KEY}`);
     const page = await response.json();
     return page;
+} catch (err) {
+    return error({
+        title: 'Ошибка!',
+        text: `${err}`
+    });
+    };
 };
 
 function onShowMoreBtnClick() { 
